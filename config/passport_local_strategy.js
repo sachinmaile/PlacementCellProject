@@ -15,17 +15,15 @@ passport.use(new LocalStrategy({ usernameField:'email' },
             }
         })
         .catch((err)=>{
-            if(err){
-                console.log('Error in finding emp-->passport');
-                return done(err);
-            }
+            console.log('Error in finding emp-->passport');
+            return done(err);
         })
     } 
 ));
 
 //Seriallizing the user to decide which key is to kept in the cookies
 passport.serializeUser(async (emp,done)=>{
-    await done(null,emp.id);
+    done(null,emp.id);
 })
 
 //deserializing the user from the key in the cookies
@@ -46,7 +44,7 @@ passport.checkAuthentication=function(req,res,next){
 }
 
 passport.setAuthenticatedUser=function(req,res,next){
-    if(req.isAuthenticated()) res.locals.emp=req.emp;
+    if(req.isAuthenticated()) res.locals.user=req.user;
     next();
 }
 

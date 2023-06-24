@@ -6,5 +6,6 @@ console.log('router loaded');
 router.get('/',homeController.home);
 
 router.use('/emp',require('./employee'));
+router.use('/student',require('./student'));
 
 module.exports=router;

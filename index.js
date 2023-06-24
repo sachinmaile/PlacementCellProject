@@ -20,7 +20,7 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
 app.use(session({
-    name:'SocialMediaWebApp',
+    name:'PlacementCell',
     secret:'blah',
     saveUninitialized:false,
     resave:false,

@@ -1,0 +1,31 @@
+<h1><%= title %></h1>
+<% if(locals.user){ %>
+<section id="students-data">
+    <h2>Students Data</h2>
+    <form action="/student/create" id="create-student" method="POST">
+        <input type="number" name="id" placeholder="Enter id" required><br>
+        <input type="text" name="name" placeholder="Enter Student Name" required><br>
+        <input type="text" name="college" placeholder="Enter College Name" required><br>
+        <input type="number" name="batch" placeholder="Enter year of joining" required><br>
+        <select name="status">
+            <option value="Placed" selected>Placed</option>
+            <option value="Not Placed">Not Placed</option>
+        </select><br>
+        <input type="number" name="DSAFinalScore" placeholder="Enter score in DSA" required><br>
+        <input type="number" name="WebDFinalScore" placeholder="Enter score in WebD" required><br>
+        <input type="number" name="ReactFinalScore" placeholder="Enter score in React" required><br>
+        <input type="submit" value="Add Student">
+    </form>
+</section>
+
+<section id="view-students-details">
+    <% for(stud of student) { %>
+        <ul>
+            <li id="student-<%= stud._id %>">
+                <a href="/student/profile/<%= stud._id %>"><%= stud.name %></a>
+            </li>
+        </ul>
+    <% } %>
+</section>
+
+<% } %>
