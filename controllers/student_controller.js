@@ -26,11 +26,4 @@ module.exports.profile=async (req,res)=>{
        console.log('Error', err);
        return;
    }
-//    await User.findById(req.params.id)
-//     .then((user)=>{
-//         return res.render('user_profile',{
-//             title:'User Profile',
-//             profile_user:user
-//         });
-//     });
 }
