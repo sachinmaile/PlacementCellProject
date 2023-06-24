@@ -1,6 +1,7 @@
 const Employee=require('../models/employee');
 
 module.exports.signUp=function (req,res){
+    if(req.isAuthenticated()){ return res.redirect('/emp/profile'); }
     return res.render('emp_sign_up',{title:'Employee SignUp'});
 }
 
@@ -35,23 +36,24 @@ module.exports.create=async (req,res)=>{
 }
 
 module.exports.createSession=async (req,res)=>{
-    await Employee.findOne({email:req.body.email})
-    .then((emp)=>{
-        if(emp){
-            if(emp.password!=req.body.password){
-                return  res.redirect('back');
-            }
-            res.cookie('emp_id',emp._id);
-            return res.redirect('/emp/profile');
-        }
-        else{
-            return res.redirect('back');
-        }
-    })
-    .catch((err)=>{
-            console.log('Error in finding emp in signing in');
-            return;
-    })
+    // await Employee.findOne({email:req.body.email})
+    // .then((emp)=>{
+    //     if(emp){
+    //         if(emp.password!=req.body.password){
+    //             return  res.redirect('back');
+    //         }
+    //         res.cookie('emp_id',emp._id);
+    //         return res.redirect('/emp/profile');
+    //     }
+    //     else{
+    //         return res.redirect('back');
+    //     }
+    // })
+    // .catch((err)=>{
+    //         console.log('Error in finding emp in signing in');
+    //         return;
+    // })
+    return res.redirect('/');
 }
 
 module.exports.profile= async (req,res)=>{
@@ -67,4 +69,11 @@ module.exports.profile= async (req,res)=>{
         })
     }
     else return res.redirect('/emp/signIn');
+}
+
+module.exports.destroySession=function(req,res){
+    req.logout(function(err){
+        if(err) console.log(err);
+    });
+    return res.redirect('/');
 }
