@@ -1,4 +1,5 @@
 const Student=require('../models/student');
+const Company = require('../models/company');
 
 module.exports.addStudentsPage=async (req,res)=>{
     return res.render('add_student',{title:"Stduents Page"});
@@ -31,3 +32,32 @@ module.exports.profile=async (req,res)=>{
        return;
    }
 }
+
+module.exports.deleteStudent = async function (req, res) {
+	try {
+		// find the student using id in params
+		const student = await Student.findById(req.params);
+
+		// find the companies for which interview is scheduled
+		// and delete student from company interviews list
+		if (student && student.interviews.length > 0) {
+			for (let item of student.interviews) {
+				const company = await Company.findOne({ name: item.company });
+				if (company) {
+					for (let i = 0; i < company.students.length; i++) {
+						if (company.students[i].student.toString() === id) {
+							company.students.splice(i, 1);
+							company.save();
+							break;
+						}
+					}
+				}
+			}
+		}
+		await Student.findByIdAndDelete(id);
+		res.redirect('back');
+	} catch (error) {
+		console.log('Error in deleting student');
+		return res.redirect('back');
+	}
+};

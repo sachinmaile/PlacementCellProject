@@ -1,4 +1,7 @@
 const Employee=require('../models/employee');
+const Student=require('../models/student');
+const fs = require('fs');
+// const fastcsv = require('fast-csv');
 
 module.exports.signUp=function (req,res){
     if(req.isAuthenticated()){ return res.redirect('/emp/profile'); }
@@ -77,3 +80,52 @@ module.exports.destroySession=function(req,res){
     });
     return res.redirect('/');
 }
+
+module.exports.downloadCsv = async function (req, res) {
+	try {
+		const students = await Student.find({});
+
+		let data = '';
+		let no = 1;
+		let csv = 'S.No, Name, College, Status, Batch, DSA Score, WebDev Score, React Score, Interview, Date, Result';
+
+		for (let student of students) {
+			data =
+				no +
+				',' +
+				student.name +
+				',' +
+				student.college +
+				',' +
+				student.status +
+				',' +
+				student.batch +
+				',' +
+				student.DSAFinalScore +
+				',' +
+				student.WebDFinalScore +
+				',' +
+				student.ReactFinalScore;
+
+			// if (student.interviews.length > 0) {
+				// for (let interview of student.interviews) {
+				// 	data += ',' + interview.company + ',' + interview.date.toString() + ',' + interview.result;
+				// }
+			//}
+			no++;
+			csv += '\n' + data;
+		}
+
+		const dataFile = fs.writeFile('report/data.csv', csv, function (error, data) {
+			if (error) {
+				console.log(error);
+				return res.redirect('back');
+			}
+			console.log('Report generated successfully');
+			return res.download('report/data.csv');
+		});
+	} catch (error) {
+		console.log(`Error in downloading file: ${error}`);
+		return res.redirect('back');
+	}
+};

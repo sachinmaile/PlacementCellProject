@@ -5,6 +5,7 @@ const passport = require('passport');
 
 router.get('/addStudentsPage',studentController.addStudentsPage);
 router.post('/create',studentController.create);
-router.get('/profile/:id',studentController.profile)
+router.get('/profile/:id',studentController.profile);
+router.get('/delete/:id',studentController.deleteStudent);
 
 module.exports=router;

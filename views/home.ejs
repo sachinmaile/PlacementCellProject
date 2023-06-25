@@ -39,6 +39,10 @@
                         <td><%=stud.WebDFinalScore%></td>
                         <td><%=stud.ReactFinalScore%></td>
                         <td><%=stud.status%></td>
+                        
+                        <td style="display: flex; justify-content: space-around; align-items: center">
+                            <a href="/student/delete/<%=stud._id%>" type="button" class="btn btn-danger btn-small">Delete</a>
+                        </td>
                     </tr>
                     <%}%>
                 </tbody>

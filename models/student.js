@@ -9,6 +9,10 @@ const studentSchema=new mongoose.Schema({
     DSAFinalScore:{type:Number,required:true},
     WebDFinalScore:{type:Number,required:true},
     ReactFinalScore:{type:Number,required:true},
+    interviews: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Interview',
+    }
 },{timestamp:true});
 
 const Student=mongoose.model('Student',studentSchema);
