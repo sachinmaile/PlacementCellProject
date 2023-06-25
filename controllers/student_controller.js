@@ -1,5 +1,9 @@
 const Student=require('../models/student');
 
+module.exports.addStudentsPage=async (req,res)=>{
+    return res.render('add_student',{title:"Stduents Page"});
+}
+
 module.exports.create=async (req,res)=>{
     Student.create(req.body)
     .then(()=>{

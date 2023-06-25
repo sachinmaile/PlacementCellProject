@@ -1,0 +1,85 @@
+<!-- <section id="students-data">
+    <h2>Students Data</h2>
+    <form action="/student/create" id="create-student" method="POST">
+        <input type="number" name="id" placeholder="Enter id" required><br>
+        <input type="text" name="name" placeholder="Enter Student Name" required><br>
+        <input type="text" name="college" placeholder="Enter College Name" required><br>
+        <input type="number" name="batch" placeholder="Enter year of joining" required><br>
+        <select name="status">
+            <option value="Placed" selected>Placed</option>
+            <option value="Not Placed">Not Placed</option>
+        </select><br>
+        <input type="number" name="DSAFinalScore" placeholder="Enter score in DSA" required><br>
+        <input type="number" name="WebDFinalScore" placeholder="Enter score in WebD" required><br>
+        <input type="number" name="ReactFinalScore" placeholder="Enter score in React" required><br>
+        <input type="submit" value="Add Student">
+    </form>
+</section> -->
+
+<form
+    class="w-50 mx-auto mt-4"
+    id="create-student"
+    action="/student/create"
+    method="post"
+    style="
+        height: 100%;
+        display: grid;
+        place-content: center;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);
+        padding: 50px 70px;
+    "
+>
+    <h3 style="text-align: center">Add Student</h3>
+    <fieldset>
+        <label for="batch">Batch</label>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="batch" name="batch" />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="mb-3">
+            <label for="id" class="form-label">Mobile Number</label>
+            <input type="number" class="form-control" id="id" name="id" />
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="abc@gmail.com" name="email" />
+        </div>
+        <div class="mb-3">
+            <label for="college" class="form-label">College Name</label>
+            <input type="text" class="form-control" id="college" name="college" />
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Placement Status</label>
+            <select class="form-select" aria-label="Default select example" name="status" id="status">
+                <option value="Placed">Placed</option>
+                <option value="Not Placed">Not Placed</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="mb-3" style="display: flex; justify-content: space-between">
+            <div class="mb-3 p-1">
+                <label for="DSAFinalScore" class="form-label">DSA</label>
+                <input type="text" class="form-control" id="DSAFinalScore" name="DSAFinalScore" />
+            </div>
+            <div class="mb-3 p-1">
+                <label for="webd" class="form-label">Web Development</label>
+                <input type="text" class="form-control" id="webd" name="WebDFinalScore" />
+            </div>
+            <div class="mb-3 p-1">
+                <label for="react" class="form-label">React</label>
+                <input type="text" class="form-control" id="react" name="ReactFinalScore" />
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" class="btn btn-success align-self-center">Add Student</button>
+</form>

@@ -1,33 +1,56 @@
 <h1><%= title %></h1>
 <% if(locals.user){ %>
-<section id="students-data">
-    <h2>Students Data</h2>
-    <form action="/student/create" id="create-student" method="POST">
-        <input type="number" name="id" placeholder="Enter id" required><br>
-        <input type="text" name="name" placeholder="Enter Student Name" required><br>
-        <input type="text" name="college" placeholder="Enter College Name" required><br>
-        <input type="number" name="batch" placeholder="Enter year of joining" required><br>
-        <select name="status">
-            <option value="Placed" selected>Placed</option>
-            <option value="Not Placed">Not Placed</option>
-        </select><br>
-        <input type="number" name="DSAFinalScore" placeholder="Enter score in DSA" required><br>
-        <input type="number" name="WebDFinalScore" placeholder="Enter score in WebD" required><br>
-        <input type="number" name="ReactFinalScore" placeholder="Enter score in React" required><br>
-        <input type="submit" value="Add Student">
-    </form>
-</section>
+    <div class="w-75 mx-auto mt-5">
+        <br />
 
-<section id="view-students-details">
-    <% for(stud of student) { %>
-        <ul>
-            <li id="student-<%= stud._id %>">
-                <a href="/student/profile/<%= stud._id %>"><%= stud.name %></a>
-            </li>
-        </ul>
-    <% } %>
-</section>
+        <div class="row">
+            <div class="col-6">
+                <h2>List of Students:</h2>
+            </div>
 
-<a href="http://localhost:8000/interview/allInterviews">Link To Interviews</a>
+            <div class="col-6 d-flex justify-content-end">
+                <a href="/student/addStudentsPage" type="button" class="btn btn-success align-self-center">+ Add Student</a>
+            </div>
+        </div>
+
+        <% if(student.length > 0) {%>
+        <div class="mt-3 mb-3">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Batch</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">College</th>
+                        <th scope="col">DSAFinalScore</th>
+                        <th scope="col">WebDFinalScore</th>
+                        <th scope="col">ReactFinalScore</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="myTable">
+                    <% for(let stud of student) {%>
+                    <tr>
+                        <th scope="row"><%=stud.batch%></th>
+                        <td><%=stud.name%></td>
+                        <td><%=stud.college%></td>
+                        <td><%=stud.DSAFinalScore%></td>
+                        <td><%=stud.WebDFinalScore%></td>
+                        <td><%=stud.ReactFinalScore%></td>
+                        <td><%=stud.status%></td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+        <%}else{%>
+        <div class="w-75 mx-auto mt-5">
+            <h2>No Records Found</h2>
+        </div>
+        <%}%>
+    </div>
+
+    <a href="http://localhost:8000/interview/allInterviews">Link To Interviews</a>
 
 <% } %>
