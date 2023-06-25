@@ -1,9 +1,10 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const path=require('path');
+require('dotenv').config();
 const app=express();
 const expressLayouts=require('express-ejs-layouts');
-const port=8000;
+const port=process.env.PORT;
 const db=require('./config/mongoose');
 const session=require('express-session');
 const passport=require('passport');
@@ -21,7 +22,7 @@ app.set('views',path.join(__dirname,'views'));
 
 app.use(session({
     name:'PlacementCell',
-    secret:'blah',
+    secret:process.env.SECRET_SESSION_COOKIE,
     saveUninitialized:false,
     resave:false,
     cookie:{maxAge:(1000*60*5)},
