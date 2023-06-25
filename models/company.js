@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const companySchema = new mongoose.Schema(
 	{
-		CompanyName: {
+		name: {
 			type: String,
 			unique: true,
 		},
@@ -19,8 +19,8 @@ const companySchema = new mongoose.Schema(
 				result: {
 					type: String,
 					enum: ['On Hold', 'Selected', 'Pending', 'Not Selected', 'Did not Attempt'],
-				},
-			},
+				}
+			}
 		],
 	},
 	{ timestamps: true }

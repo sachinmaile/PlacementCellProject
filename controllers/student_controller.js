@@ -2,7 +2,7 @@ const Student=require('../models/student');
 const Company = require('../models/company');
 
 module.exports.addStudentsPage=async (req,res)=>{
-    return res.render('add_student',{title:"Stduents Page"});
+    return res.render('add_student',{title:"Students Page"});
 }
 
 module.exports.create=async (req,res)=>{
@@ -11,7 +11,7 @@ module.exports.create=async (req,res)=>{
         return res.redirect('back');
     })
     .catch((err)=>{
-        console.log('Error in creating student');
+        console.log('Error in creating student',err);
         return;
     })
 }
@@ -36,7 +36,7 @@ module.exports.profile=async (req,res)=>{
 module.exports.deleteStudent = async function (req, res) {
 	try {
 		// find the student using id in params
-		const student = await Student.findById(req.params);
+		const student = await Student.findById(req.params.id);
 
 		// find the companies for which interview is scheduled
 		// and delete student from company interviews list
@@ -54,10 +54,10 @@ module.exports.deleteStudent = async function (req, res) {
 				}
 			}
 		}
-		await Student.findByIdAndDelete(id);
+		await Student.findByIdAndDelete(req.params.id);
 		res.redirect('back');
 	} catch (error) {
-		console.log('Error in deleting student');
+		console.log('Error in deleting student',error);
 		return res.redirect('back');
 	}
 };
